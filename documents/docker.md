@@ -22,3 +22,8 @@ The benefits of containers and Docker over a VM are:
 
 We run containers that are based on images. As we have said, an image is the software package including the application and the runtime. A container is a runnable instance of that image.
 Images are the blueprint, containers are the instance of our packages running.
+
+we can use precooked images such as the many official packages. For demonstration purposes we will take the official node package. running `docker run node` will begin the download but we need to understand:
+
+- interactive shells are contained, containers are contained.
+- to expose the interactive shell of our node image we can use `docker run -it node` where the `-it` instructs that the interactive shell is exposed to us.
