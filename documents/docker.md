@@ -17,3 +17,8 @@ The benefits of containers and Docker over a VM are:
 - low impact on OS, fast and use minimal disk space
 - sharing, rebuilding and distribution is easier
 - Encapsulates environments and apps for the needs, nothing more.
+
+## Images & Containers
+
+We run containers that are based on images. As we have said, an image is the software package including the application and the runtime. A container is a runnable instance of that image.
+Images are the blueprint, containers are the instance of our packages running.
