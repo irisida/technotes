@@ -27,3 +27,9 @@ we can use precooked images such as the many official packages. For demonstratio
 
 - interactive shells are contained, containers are contained.
 - to expose the interactive shell of our node image we can use `docker run -it node` where the `-it` instructs that the interactive shell is exposed to us.
+
+## Running an image
+
+Assuming we have an application we wish to `dockerise` and that it is a webapp where the node server is listening on port 80. This does not mean that our container being run needs to be on port 80. We can use the `docker run -p {localport}:{internalport} imageId` notation.
+
+eg. docker run -p 3000:80 8f428c65c994 will run the app on port3000 even though the internal port was set to 80.
