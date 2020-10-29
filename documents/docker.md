@@ -65,6 +65,8 @@ CMD ["node", "server.js" ]
 
 ## Stopping & Restarting containers
 
+Stopping, we use `docker stop {container name}`
+
 using `docker run` creates a new container. When we have a stopped a container and nothing about our application or configuration has changed then there is no need to generate a new container. We can restart the existing one.
 
 To restart we use `docker start container_name`, however this will not block a terminal like the `docker run` command. You can verify its running with the `docker ps` command.
