@@ -33,3 +33,32 @@ we can use precooked images such as the many official packages. For demonstratio
 Assuming we have an application we wish to `dockerise` and that it is a webapp where the node server is listening on port 80. This does not mean that our container being run needs to be on port 80. We can use the `docker run -p {localport}:{internalport} imageId` notation.
 
 eg. docker run -p 3000:80 8f428c65c994 will run the app on port3000 even though the internal port was set to 80.
+
+## Image layering
+
+We encounter our first potential for Dockerfile optimisation when we talk about image layering. Basically each command in a dockerfile is treated like a layer that builds up the image. While we can advantage from cached layers if we rebuild the exact same image and see the build take a fraction of a second, where anything changes a full rebuild and new image is created.
+
+Where we have a change in one layer (say, source code) all subsequent layers are re-run afterwards because Docker doesn't do any deep analysis. It notices that in the steps of commands one has a difference to the previous build and therefore all further steps must be treated as if there is no history and re-run. In our file we do the copy of source before the `npm install` so any source code changes and rebuild will also run the `npm install` which is inefficient. To circumevent that we can do the following
+
+```dockerfile
+# node base
+FROM node
+
+# sets the workdir
+WORKDIR /app
+
+# copy only the package.json, if no libs are added it doesn't change
+COPY package.json /app
+
+# npm install sequence
+RUN npm install
+
+# now copy the source code (this is where the mst common change is)
+COPY . /app
+
+# expose ports
+EXPOSE 80
+
+# set the post sequence commands.
+CMD ["node", "server.js" ]
+```
