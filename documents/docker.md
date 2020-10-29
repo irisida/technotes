@@ -62,3 +62,21 @@ EXPOSE 80
 # set the post sequence commands.
 CMD ["node", "server.js" ]
 ```
+
+## Stopping & Restarting containers
+
+using `docker run` creates a new container. When we have a stopped a container and nothing about our application or configuration has changed then there is no need to generate a new container. We can restart the existing one.
+
+To restart we use `docker start container_name`, however this will not block a terminal like the `docker run` command. You can verify its running with the `docker ps` command.
+
+This highlights two modes:
+
+- attached mode (running in foreground, default for `docker run`)
+- detached mode (running in background, default for `docker start`)
+
+we can set the modes or change the modes with flags.
+
+- If we want to use the `docker run` which has a default of attached in a detached mode we add the `-d` flag.
+- On starting a detached run it will show the id. You can then attach yourself to a running container with `docker attach {container_name}`.
+- For containers being restarted which has a default of unattached and you wish to run in attached mode we can use the `-a` flag to start in attached mode.
+- if we want to see the logs of a container we run `docker logs {container_name}` and this will show us the output from a container we have been detached from. This is a snapshot though and if we want to follow that in attached mode, we would run with a `-f` flag to follow, which again would block the terminal.
