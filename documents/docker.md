@@ -82,3 +82,10 @@ we can set the modes or change the modes with flags.
 - On starting a detached run it will show the id. You can then attach yourself to a running container with `docker attach {container_name}`.
 - For containers being restarted which has a default of unattached and you wish to run in attached mode we can use the `-a` flag to start in attached mode.
 - if we want to see the logs of a container we run `docker logs {container_name}` and this will show us the output from a container we have been detached from. This is a snapshot though and if we want to follow that in attached mode, we would run with a `-f` flag to follow, which again would block the terminal.
+
+Because we don't want to leave containers we don't need running, stopping and removing is a strategy we must look at. It's possible for us to be able to remove the container once it is complete.
+
+Assuming we have a container running a webapp that we want to expose port 80 on a local port of 3000 in detached mode and to automatically remove on completion we can use:
+`docker run -p 3000:80 --rm containerId`
+
+In this mode we will see our webapp running via `docker ps` but if we choose to close it and run `docker ps -a` we will no longer see it, it will be gone. Why is this useful? Well the typical usecase here is that you would only be stopping your web serice when you had to rebuild the code anyway so it would be replaced by a new container.
