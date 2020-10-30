@@ -89,3 +89,12 @@ Assuming we have a container running a webapp that we want to expose port 80 on 
 `docker run -p 3000:80 --rm containerId`
 
 In this mode we will see our webapp running via `docker ps` but if we choose to close it and run `docker ps -a` we will no longer see it, it will be gone. Why is this useful? Well the typical usecase here is that you would only be stopping your web serice when you had to rebuild the code anyway so it would be replaced by a new container.
+
+## Inspect an image
+
+with `docker image inspect imageId` it's possible to inspect the image and see the construction attributes. ie. Exposed ports, environment version variables. It's also holding the underlying OS layers. It also details the actual layers of the image itself which are part of the build/rebuild and caching utilisation.
+
+## Copying files from local into a container
+
+We can copy files from the local project directory into a running container using the standard `cp` commands. We use the format `docker cp targetFolder/targetFile containerName:/destinationFolder`
+It' also possible to provide the path to a folder and take all the files by using a dot as a the all indicator. `docker cp targetFolder/. containerName:/destination`
