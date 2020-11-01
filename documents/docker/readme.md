@@ -1,5 +1,7 @@
 # Docker
 
+## Core building blocks
+
 - [What is Docker?](/documents/docker/S2_01_what_is_docker.md)
   - What is a container?
   - What is an image?
@@ -15,3 +17,5 @@
   - Copying files to/from containers
   - tagging and naming images and containers
   - Sharing images and containers
+
+## Managing Data & working with volumes
